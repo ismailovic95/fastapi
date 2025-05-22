@@ -85,4 +85,3 @@ API_KEY = "your-secret-token"
 - [ ] Schedule CRON to re-index new posts
 - [ ] Add admin reload route
 - [ ] Connect to Redis for persistent cache
-# fastapi
