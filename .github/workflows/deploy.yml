@@ -7,7 +7,8 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+
     steps:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v3
@@ -17,12 +18,13 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: 🧪 Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: 🔥 Deploy to Railway
+      - name: 🔥 Install Railway CLI
         run: |
           curl -fsSL https://railway.app/install.sh | sh
-          echo "${{ secrets.RAILWAY_TOKEN }}" | railway login --ci
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
+
+      - name: 🚀 Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
           railway up
