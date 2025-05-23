@@ -2,16 +2,17 @@
 FROM python:3.12-slim AS builder
 
 WORKDIR /app
-
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Stage 2: Final image
 FROM python:3.12-slim
-
 WORKDIR /app
 
+# Copy Python packages from builder
 COPY --from=builder /usr/local /usr/local
+
+# Copy app source code
 COPY . .
 
 ENV PORT=8000
