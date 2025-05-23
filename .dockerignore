@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.env
 *.db
-tests/
+.env
 node_modules/
+tests/
